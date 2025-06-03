@@ -2,7 +2,7 @@ pipeline {
     agent {
        docker {
           image 'docker:24.0.5-dind'
-          args '-v /var/run/docker.sock:/var/run/docker.sock'
+          args '--privileged'
        }
     }
     stages {
@@ -16,20 +16,6 @@ pipeline {
                 sh 'docker --version'
             }
         } 
-        stage('Install Docker') {
-            steps {
-                sh '''
-                if ! command -v docker &> /dev/null
-                then
-                   echo "Installing docker"
-                   apt-get update
-                   apt-get install -y docker.io
-                else
-                   echo "Docker already installed"
-                fi  
-                '''
-            }
-        }
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t my-postgres .'
