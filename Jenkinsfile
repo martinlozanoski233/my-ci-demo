@@ -1,8 +1,8 @@
 pipeline {
-    agent any
-    environment {
-        DOCKER_HOST = 'tcp://172.18.0.2:2375'
-        DOCKER_TLS_VERIFY = ''
+    agent {
+        node {
+            label 'docker-agent-alpine'
+        }
     }
     stages {
         stage('Checkout') {
