@@ -4,6 +4,7 @@ pipeline {
            image 'lozanoskim/my-postgres:latest'
            args '-u root'
        }
+    }    
         
     stages {
         stage('Checkout') {
