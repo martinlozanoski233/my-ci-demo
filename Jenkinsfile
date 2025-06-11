@@ -1,16 +1,12 @@
 pipeline {
-   agent any
+   agent {
+      docker {
+          image 'lozanoskim/my-postgres:latest' 
+          args '-u root'
+      }
+   }
 
    stages {
-
-      stage('Install psql') {
-         steps {
-            sh '''
-            apt-get update && apt-get install -y postgresql-client
-            psql --version
-            '''
-         }
-      }
 
       stage('Check environment') {
           steps {
