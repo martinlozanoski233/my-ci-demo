@@ -13,5 +13,6 @@ pipeline {
               git --version
               '''
           }
+      }
    }
 }
