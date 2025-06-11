@@ -35,4 +35,4 @@ pipeline {
           sh 'docker rm postgres-container || true'
        }
     }
-
+}
