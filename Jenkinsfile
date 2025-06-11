@@ -1,7 +1,5 @@
 pipeline {
-   agent {
-      label 'docker-agent-ci'
-   }
+   agent any
 
    stages {
       stage('Check environment') {
