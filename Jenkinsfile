@@ -1,7 +1,7 @@
 pipeline {
    agent {
       docker {
-          image 'lozanoskim/my-postgres:latest' 
+          image 'postgres:13' 
           args '-u root'
       }
    }
