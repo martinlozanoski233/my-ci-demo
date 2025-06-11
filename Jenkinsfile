@@ -17,29 +17,17 @@ pipeline {
                 sh 'docker --version'
             }
         } 
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t my-postgres .'
-            }
-        }
-        stage('Run container') {
+         stage('Start PostgreSQL') {
             steps {
                 sh '''
-                docker run -d \
-                --name postgres-container \
-                -e POSTGRES_PASSWORD=secret \
-                -v $PWD/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql \
-                -v $PWD/script.sh:/scripts/script.sh
+                docker run -d --name my_postgres \
+                    -e POSTGRES_USER=postgres \
+                    -e POSTGRES_PASSWORD=postgres \
+                    -e POSTGRES_DB=mydatabase \
+                    lozanoskim/my-postgres:latest
                 '''
-                sh 'sleep 10' 
             }
         }
-        stage('Run script inside a container') {
-            steps {
-                sh 'docker exec postgres-container bash /scripts/script.sh'
-            }
-        }
-    }
     post {
        always {
           sh 'docker stop postgres-container || true'
