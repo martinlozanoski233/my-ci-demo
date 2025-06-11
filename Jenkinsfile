@@ -4,12 +4,6 @@ pipeline {
            image 'lozanoskim/my-postgres:latest'
            args '-u root'
        }
-
-    environment {
-        CONTAINER_NAME = "postgres-container"
-        IMAGE_NAME = "lozanoskim/my-postgres:latest"
-        GIT_REPO = "https://github.com/martinlozanoski233/my-ci-demo.git"
-    }
         
     stages {
         stage('Checkout') {
