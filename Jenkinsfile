@@ -28,10 +28,11 @@ pipeline {
                 '''
             }
         }
+    }    
     post {
        always {
           sh 'docker stop postgres-container || true'
           sh 'docker rm postgres-container || true'
        }
     }
-}
+
