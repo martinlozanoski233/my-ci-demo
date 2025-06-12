@@ -14,18 +14,6 @@ pipeline {
               '''
           }
       }
-
-      stage('Start PostgreSQL Container') {
-            steps {
-                sh '''
-                docker run -d --name my_postgres \
-                    -e POSTGRES_USER=postgres \
-                    -e POSTGRES_PASSWORD=secret \
-                    -e POSTGRES_DB=mydatabase \
-                    lozanoskim/my-postgres:latest
-                '''
-            }
-      }
      
       stage('Install Docker') {
             steps {
