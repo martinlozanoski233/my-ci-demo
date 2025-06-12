@@ -19,13 +19,11 @@ pipeline {
             steps {
                 echo 'Checking Docker installation'
                 sh '''
-                if ! command -v docker &> /dev/null
-                then
-                    echo "Docker not found, installing..."
-                    sudo apt-get update
-                    sudo apt-get install -y docker.io
+                if ! command -v docker &> /dev/null; then
+                echo "Docker is not installed, aborting pipeline."
+                exit 1
                 else
-                    echo "Docker already installed"
+                echo "Docker is installed"
                 fi
                 '''
             }
