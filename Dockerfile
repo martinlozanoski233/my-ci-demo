@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM jenkins/inbound-agent:latest
 
 USER root
 
@@ -9,8 +9,6 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     sudo \
     bash \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean
 
-WORKDIR /workspace
-USER root
+USER jenkins
