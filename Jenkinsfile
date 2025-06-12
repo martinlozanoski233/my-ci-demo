@@ -10,7 +10,6 @@ pipeline {
               sh '''
               echo "Running as: $(whoami)"
               docker --version
-              psql --version
               git --version
               '''
           }
