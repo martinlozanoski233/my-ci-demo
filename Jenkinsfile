@@ -24,5 +24,11 @@ pipeline {
               '''
           }
       }
+
+      stage('Get some data from container'){
+          steps {
+              sh 'docker inspect my-postgres | grep IPAddress'
+          } 
+      }
    }
 }

@@ -6,4 +6,6 @@ CREATE TABLE IF NOT EXISTS users (
 
 INSERT INTO users (name, email) VALUES 
 ('Martin', 'martin@hotmail.com'),
-('Ana','ana@gmail.com');
+('Ana','ana@gmail.com'),
+('Davor','davor@yahoo.com'),
+('Marko','marko@hotmail.com');
