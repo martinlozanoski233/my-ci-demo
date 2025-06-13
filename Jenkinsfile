@@ -21,7 +21,7 @@ pipeline {
               docker run -d --name my-postgres \
                 -e POSTGRES_USER=postgres \
                 -e POSTGRES_PASSWORD=secret \
-                -e POSTGRES_DB=mydb
+                -e POSTGRES_DB=mydb \
                 lozanoskim/my-postgres:latest
               '''  
           }
