@@ -14,24 +14,13 @@ pipeline {
               '''
           }
       }
-     
-      stage('Start PostgreSQL') {
-          steps {
-              sh '''
-              docker run -d --name my-postgres \
-                -e POSTGRES_USER=postgres \
-                -e POSTGRES_PASSWORD=secret \
-                -e POSTGRES_DB=mydb \
-                lozanoskim/my-postgres:latest
-              '''  
-          }
-      }
 
       stage('Setub DB') {
           steps {
               sh '''
-                echo "Running SQL init script" 
-                PGPASSWORD=secret psql -h my-postgres -U postgres -d mydb -f init-db.sql
+                echo "Running SQL init script"
+                docker cp init-db.sql my-postgres:/init-db.sql 
+                docker exec my-postgres bash -c "PGPASSWORD=secret psql -U postgres -d mydb -f /init-db.sql"
               '''
           }
       }
