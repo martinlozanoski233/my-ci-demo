@@ -15,18 +15,25 @@ pipeline {
           }
       }
      
-      stage('Install Docker') {
-            steps {
-                echo 'Checking Docker installation'
-                sh '''
-                if ! command -v docker &> /dev/null; then
-                echo "Docker is not installed, aborting pipeline."
-                exit 1
-                else
-                echo "Docker is installed"
-                fi
-                '''
-            }
+      stage('Start PostgreSQL') {
+          steps {
+              sh '''
+              docker run -d --name my-postgres \
+                -e POSTGRES_USER=postgres \
+                -e POSTGRES_PASSWORD=secret \
+                -e POSTGRES_DB=mydb
+                lozanoskim/my-postgres:latest
+              '''  
+          }
+      }
+
+      stage('Setub DB') {
+          steps {
+              sh '''
+                echo "Running SQL init script" 
+                PGPASSWORD=secret psql -h my-postgres -U postgres -d mydb -f init-db.sql
+              '''
+          }
       }
    }
 }
